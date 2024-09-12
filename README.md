@@ -30,6 +30,6 @@ In docker:
 - `docker-compose up -d` url disponibil la:  `https://datecuiapi.localhost/date-cui/{cui}`; 
 ![exemplu-raspuns](image.png)
 
-- Vei avea nevoie si de `date_firme_cui.db` (250 RON la cerere);
+- Vei avea nevoie si de `date_firme_cui.db` - 200 RON la cerere (~2mil firme si pfa-uri);
 
 Fisierul binary este in folderul dist si a fost creat cu comanda: `go build -o dist/datecuiapi main.go`.
