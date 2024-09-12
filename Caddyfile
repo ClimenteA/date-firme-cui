@@ -1,0 +1,3 @@
+datecuiapi.localhost {
+	reverse_proxy date-cui-api:3240
+}

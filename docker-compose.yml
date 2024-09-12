@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+
+  date-cui-api:
+    container_name: date-cui-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./date_firme_cui.db:/home/date_firme_cui.db # contacteaza-ma pt. DB
+      - sqlitedata:/home
+    ports:
+      - 3240:3240
+    networks:
+      - web
+
+  proxy:
+    container_name: date-cui-api-proxy
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+
+volumes:
+  caddy_data:
+  caddy_config:
+  sqlitedata:
+
+networks:
+  web:
+    driver: bridge

@@ -14,6 +14,9 @@ Un GET request la adresa url `http://localhost:3240/date-cui/43000098` va da un 
 }
 ```
 
+**Observatii**: 
+- Setul de date oferit din iunie_2024 are toate diacriticele lipsa, asa ca sunt multe adrese gresite.
+
 Datele sunt publice si oferite de [data.gov.ro](https://data.gov.ro/dataset/) la adresa web:
 - https://data.gov.ro/dataset/date_de_identificare_platitori_actualizate_iunie_2024
 
@@ -22,8 +25,10 @@ Poti vedea date CUI si la pagina web oferita de Ministerul Finantelor:
 - https://mfinante.gov.ro/apps/agenticod.html?pagina=domenii
 
 
-**Observatii**: 
-- Setul de date oferit din iunie_2024 are toate diacriticele lipsa, asa ca sunt multe adrese gresite.
+In docker: 
+- `docker-compose up -d` url disponibil la:  `https://datecuiapi.localhost/date-cui/{cui}`; 
+![exemplu-raspuns](image.png)
 
+- Vei avea nevoie si de `date_firme_cui.db` (250 RON la cerere);
 
 Fisierul binary este in folderul dist si a fost creat cu comanda: `go build -o dist/datecuiapi main.go`.
