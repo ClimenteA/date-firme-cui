@@ -2,7 +2,8 @@
 
 Un api simplu in Go pentru a prelua date firme in functie de CUI. 
 
-Un GET request la adresa url `http://localhost:3240/date-cui/43000098` va da un raspuns similar:
+- `go run main.go` - pentru a rula API-ul;
+- Un GET request la adresa url `http://localhost:3240/date-cui/43000098` va da un raspuns similar:
 ```json
 {
     "cui": "43000098",
