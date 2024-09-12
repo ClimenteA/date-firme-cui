@@ -22,3 +22,6 @@ Poti vedea date CUI si la pagina web oferita de Ministerul Finantelor:
 - https://mfinante.gov.ro/apps/agenticod.html?pagina=domenii
 
 
+
+**Observatii**: 
+- Setul de date oferit din iunie_2024 are toate diacriticele lipsa, asa ca sunt multe adrese gresite.
