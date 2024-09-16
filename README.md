@@ -3,20 +3,23 @@
 Un api simplu in Go pentru a prelua date firme in functie de CUI. 
 
 - `go run main.go` - pentru a rula API-ul;
-- Un GET request la adresa url `http://localhost:3240/date-cui/43000098` va da un raspuns similar:
+- Un GET request la adresa url `http://localhost:3240/date-cui/43000099` va da un raspuns similar:
 ```json
 {
-    "cui": "43000098",
-    "nume": "CLIMENTE ALIN IONEL PERSOANA FIZICA AUTORIZATA",
+    "cui": "43000099",
+    "nume": "POPESCU GOE FIZICA AUTORIZATA",
     "nr_reg_com": "F22/1029/2020",
-    "numere_telefon": "",
-    "adresa": "Iasi",
-    "cod_judet_aprox": "RO-IS, jud. Iasi, Iasi"
+    "adresa": "Municipiul Iasi, Iasi etc etc",
+    "value": "RO-IS, jud. Iasi, Iasi",
+    "cod": "RO-IS",
+    "judet": "IASI",
+    "comuna": "",
+    "localitate": "IASI"
 }
 ```
 
 **Observatii**: 
-- Setul de date oferit din iunie_2024 are toate diacriticele lipsa, asa ca sunt multe adrese gresite.
+- Setul de date oferit de ONRC este corupt si trebuie "curatat". Am renuntat la aceasta idee din lipsa de timp.
 
 
 Poti vedea date CUI si la pagina web oferita de Ministerul Finantelor:
@@ -25,8 +28,5 @@ Poti vedea date CUI si la pagina web oferita de Ministerul Finantelor:
 
 In docker: 
 - `docker-compose up -d` url disponibil la:  `https://datecuiapi.localhost/date-cui/{cui}`; 
-![exemplu-raspuns](image.png)
 
-- Vei avea nevoie si de `date_firme_cui.db` care poate fi creat din [csv-urile oferite aici pe data.gov.ro](https://data.gov.ro/dataset/date_de_identificare_platitori_actualizate_iunie_2024);
-
-Fisierul binar este in folderul dist si a fost creat cu comanda: `go build -o dist/datecuiapi main.go`.
+Fisierul `procesare_csv_onrc_date_firme.ipynb` din aceste repo te vor ajuta sa creezi baza de date cu firme (lipsesc PFI si SA). Poti optimiza scriptul daca timpul iti permite. 

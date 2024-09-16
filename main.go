@@ -17,21 +17,27 @@ type ApiConfig struct {
 }
 
 type Firm struct {
-	CUI           string         `json:"cui"`
-	Nume          string         `json:"nume"`
-	NrRegCom      sql.NullString `json:"nr_reg_com"`
-	NumereTelefon sql.NullString `json:"numere_telefon"`
-	Adresa        string         `json:"adresa"`
-	CodJudetAprox string         `json:"cod_judet_aprox"`
+	CUI        string         `json:"cui"`
+	Nume       string         `json:"nume"`
+	NrRegCom   string         `json:"nr_reg_com"`
+	Adresa     string         `json:"adresa"`
+	Value      string         `json:"value"`
+	Cod        string         `json:"cod"`
+	Judet      string         `json:"judet"`
+	Comuna     sql.NullString `json:"comuna"`
+	Localitate sql.NullString `json:"localitate"`
 }
 
 type FirmResponse struct {
-	CUI           string `json:"cui"`
-	Nume          string `json:"nume"`
-	NrRegCom      string `json:"nr_reg_com"`
-	NumereTelefon string `json:"numere_telefon"`
-	Adresa        string `json:"adresa"`
-	CodJudetAprox string `json:"cod_judet_aprox"`
+	CUI        string `json:"cui"`
+	Nume       string `json:"nume"`
+	NrRegCom   string `json:"nr_reg_com"`
+	Adresa     string `json:"adresa"`
+	Value      string `json:"value"`
+	Cod        string `json:"cod"`
+	Judet      string `json:"judet"`
+	Comuna     string `json:"comuna"`
+	Localitate string `json:"localitate"`
 }
 
 func main() {
@@ -87,10 +93,10 @@ func getApiConfig() string {
 }
 
 func getFirmByCUI(db *sql.DB, cui string) (FirmResponse, error) {
-	row := db.QueryRow("SELECT cui, nume, nr_reg_com, numere_telefon, adresa, cod_judet_aprox FROM date_firme_cui WHERE cui = ?", cui)
+	row := db.QueryRow("SELECT * FROM date_firme_nume_cui WHERE cui = ?", cui)
 
 	var firm Firm
-	err := row.Scan(&firm.CUI, &firm.Nume, &firm.NrRegCom, &firm.NumereTelefon, &firm.Adresa, &firm.CodJudetAprox)
+	err := row.Scan(&firm.CUI, &firm.Nume, &firm.NrRegCom, &firm.Adresa, &firm.Value, &firm.Cod, &firm.Judet, &firm.Comuna, &firm.Localitate)
 	if err == sql.ErrNoRows {
 		return FirmResponse{}, nil
 	} else if err != nil {
@@ -98,12 +104,15 @@ func getFirmByCUI(db *sql.DB, cui string) (FirmResponse, error) {
 	}
 
 	resp := FirmResponse{
-		CUI:           firm.CUI,
-		Nume:          firm.Nume,
-		NrRegCom:      firm.NrRegCom.String,
-		NumereTelefon: firm.NumereTelefon.String,
-		Adresa:        firm.Adresa,
-		CodJudetAprox: firm.CodJudetAprox,
+		CUI:        firm.CUI,
+		Nume:       firm.Nume,
+		NrRegCom:   firm.NrRegCom,
+		Adresa:     firm.Adresa,
+		Value:      firm.Value,
+		Cod:        firm.Cod,
+		Judet:      firm.Judet,
+		Comuna:     firm.Comuna.String,
+		Localitate: firm.Localitate.String,
 	}
 
 	return resp, nil
